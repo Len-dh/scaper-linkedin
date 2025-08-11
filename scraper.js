@@ -17,7 +17,7 @@ app.get('/scrape', async (req, res) => {
 
   try {
     const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle2' });
+    await page.goto(url, { waitUntil: 'networkidle2', timeout: 500000 });
 
     await page.waitForSelector('.description__text', { timeout: 500000 });
 
