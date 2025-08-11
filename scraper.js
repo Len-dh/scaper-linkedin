@@ -17,7 +17,7 @@ app.get('/scrape', async (req, res) => {
         '--single-process',
         '--no-zygote'
       ],
-      timeout: 100000 // on donne plus de temps pour démarrer Chrome
+      timeout: 300000 // on donne plus de temps pour démarrer Chrome
     });
 
     const page = await browser.newPage();
