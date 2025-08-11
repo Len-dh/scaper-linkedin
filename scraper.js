@@ -1,6 +1,9 @@
+const express = require('express');
 const puppeteer = require('puppeteer');
 
-module.exports = async (req, res) => {
+const app = express();
+
+app.get('/scrape', async (req, res) => {
   const url = req.query.url;
   if (!url) {
     res.status(400).json({ error: 'Le paramètre url est requis' });
@@ -16,7 +19,7 @@ module.exports = async (req, res) => {
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2' });
 
-    await page.waitForSelector('.description__text'); // CSS sélecteur spécifique à LinkedIn
+    await page.waitForSelector('.description__text'); // CSS spécifique
 
     const jobDescription = await page.$eval('.description__text', el => el.innerText);
 
@@ -26,4 +29,9 @@ module.exports = async (req, res) => {
     await browser.close();
     res.status(500).json({ error: err.message });
   }
-};
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+});
