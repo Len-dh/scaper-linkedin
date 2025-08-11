@@ -1,6 +1,9 @@
 {
+  "name": "scaper-linkedin",
+  "version": "1.0.0",
   "scripts": {
-    "start": "node scraper.js"
+    "start": "node scraper.js",
+    "postinstall": "npx puppeteer install chrome"
   },
   "dependencies": {
     "express": "^5.1.0",
