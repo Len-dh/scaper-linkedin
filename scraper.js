@@ -29,7 +29,7 @@ app.get('/scrape', async (req, res) => {
     });
 
     await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForSelector('.description__text', { timeout: 20000 });
+    await page.waitForSelector('.description__text', { timeout: 50000 });
 
     const jobDescription = await page.$eval('.description__text', el => el.innerText.trim());
 
